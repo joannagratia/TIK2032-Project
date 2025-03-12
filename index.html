@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personal Portfolio</title>
+    <style>
+        .section {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+    </style>
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        window.onload = function() {
+            showSection('home'); // Show the home section by default
+        };
+    </script>
+</head>
+<body>
+    <h1>Welcome to My Personal Homepage</h1>
+    <nav>
+        <a href="javascript:void(0);" onclick="showSection('home')">Home</a> |
+        <a href="javascript:void(0);" onclick="showSection('gallery')">Gallery</a> |
+        <a href="javascript:void(0);" onclick="showSection('blog')">Blog</a> |
+        <a href="javascript:void(0);" onclick="showSection('contact')">Contact</a>
+    </nav>
+    
+    <section id="home" class="section">
+        <h2>Home</h2>
+        <p>Welcome to my personal space on the web! Here, I share my passion, creativity, and favorite things in life. Feel free to explore and immerse yourself in the vibes of my world!</p>
+        <p>Hi there, folks! If life had a soundtrack, I’d want it to be filled with laughter, kindness, and a little bit of chaos (the fun kind, of course!). This is my little corner of the internet where dreams, ideas, and all things magical come to life. So grab a snack, get comfy, and let’s make some memories together! 💖</p>
+    </section>
+    
+    <section id="gallery" class="section">
+        <h2>Gallery</h2>
+        <p>Every picture tells a story. Here are some snapshots of my journey and the beautiful moments I've captured. Life is a canvas, and these are the strokes of my experiences. 📸</p>
+        <img src="images/sunset.jpg" alt="Photo 1" width="100">
+        <img src="images/car.jpg" alt="Photo 2" width="100">
+        <img src="images/sza.jpeg" alt="Photo 3" width="100">
+    </section>
+    
+    <section id="blog" class="section">
+        <h2>Blog</h2>
+        <article>
+            <h3>Recommended R&B Songs</h3>
+            <p>Music has the power to soothe the soul, lift our spirits, and take us on an emotional journey. Whether you're unwinding after a long day or setting the mood for a special moment, these R&B hits will hit just right. 🎶</p>
+            <ul>
+                <li>🎶 "Blinding Lights" - The Weeknd</li>
+                <li>🎶 "Adorn" - Miguel</li>
+                <li>🎶 "Best Part" - Daniel Caesar ft. H.E.R.</li>
+                <li>🎶 "Location" - Khalid</li>
+                <li>🎶 "Superstar" - Usher</li>
+            </ul>
+        </article>
+        
+        <article>
+            <h3>Chill R&B Songs</h3>
+            <p>Sometimes, you just need to sit back, relax, and let the smooth, soulful vibes of chill R&B wash over you. 🎵</p>
+            <ul>
+                <li>🎵 "Get You" - Daniel Caesar ft. Kali Uchis</li>
+                <li>🎵 "Thinkin Bout You" - Frank Ocean</li>
+                <li>🎵 "Come Through and Chill" - Miguel ft. J. Cole</li>
+                <li>🎵 "Love Galore" - SZA ft. Travis Scott</li>
+                <li>🎵 "Pretty Little Fears" - 6LACK ft. J. Cole</li>
+            </ul>
+        </article>
+        
+        <article>
+            <h3>GRWM Playlist</h3>
+            <p>Getting ready? Let these SZA hits set the perfect vibe! 💄</p>
+            <ul>
+                <li>💄 "Good Days" - SZA</li>
+                <li>💄 "Kill Bill" - SZA</li>
+                <li>💄 "Snooze" - SZA</li>
+                <li>💄 "Broken Clocks" - SZA</li>
+                <li>💄 "Drew Barrymore" - SZA</li>
+                <li>💄 "The Weekend" - SZA</li>
+                <li>💄 "Garden (Say It Like Dat)" - SZA</li>
+                <li>💄 "20 Something" - SZA</li>
+            </ul>
+            <p>Put on your makeup, pick out your outfit, and let SZA’s soulful voice make you feel unstoppable! 💃✨</p>
+        </article>
+    </section>
+    
+    <section id="contact" class="section">
+        <h2>Contact</h2>
+        <p>Here’s a little about me! Feel free to reach out and connect. 💌💬</p>
+        <p><strong>Name:</strong> Joanna Gratia</p>
+        <p><strong>Email:</strong> <a href="mailto:joannagratia@gmail.com">joannagratia@gmail.com</a></p>
+    </section>
+</body>
+</html>
