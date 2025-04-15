@@ -2,99 +2,471 @@
 <html>
 <head>
     <title>Personal Portfolio</title>
+    <!-- Adding Mirador font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mirador&display=swap">
     <style>
+        /* Reset and basic fonts */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.7;
+            padding: 0;
+            margin: 0;
+        }
+        
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header styling - MODIFIED to use background image and Mirador font */
+        header {
+            background: url('images/bg.jpg') center center;
+            background-size: cover;
+            color: white;
+            padding: 100px 0 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+            z-index: 0;
+        }
+        
+        header h1 {
+            font-family: 'Mirador', serif; /* Changed to Mirador font */
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-transform: capitalize;
+            letter-spacing: 2px;
+        }
+        
+        header p {
+            font-family: 'Mirador', serif; /* Changed to Mirador font */
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 20px;
+        }
+        
+        nav ul li a {
+            color: #444;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover, 
+        nav ul li a.active {
+            background: linear-gradient(135deg, #310000, #7d4747);
+            color: white;
+        }
+        
+        /* Main content sections */
         .section {
             display: none;
+            padding: 60px 0;
+            min-height: 60vh;
         }
+        
         .active {
             display: block;
+            animation: fadeUp 0.6s ease-out forwards;
+        }
+        
+        @keyframes fadeUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        .section h2 {
+            font-family: 'Mirador', serif; /* Changed to Mirador font */
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #444;
+            position: relative;
+            text-transform: capitalize;
+        }
+        
+        .section h2:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background: linear-gradient(135deg, #310000, #7d4747);
+        }
+        
+        /* Home section */
+        #home .content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        #home .text-content {
+            flex: 1;
+        }
+        
+        #home .image-content {
+            flex: 1;
+            text-align: center;
+        }
+        
+        #home .image-content img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Gallery section */
+        #gallery .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        #gallery .gallery-item {
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        #gallery .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        #gallery .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Blog section */
+        #blog .article-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        #blog .article-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        #blog .article-header {
+            background: linear-gradient(135deg, #310000, #7d4747);
+            color: white;
+            padding: 20px;
+        }
+        
+        #blog .article-header h3 {
+            font-family: 'Mirador', serif; /* Changed to Mirador font */
+            margin: 0;
+            font-size: 1.5rem;
+            text-transform: capitalize;
+        }
+        
+        #blog .article-content {
+            padding: 20px;
+        }
+        
+        #blog ul {
+            list-style-position: inside;
+        }
+        
+        #blog ul li {
+            padding: 6px 0;
+        }
+        
+        /* Contact section */
+        #contact .contact-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        #contact .contact-info {
+            flex: 1;
+            max-width: 600px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        #contact .contact-info h3 {
+            font-family: 'Mirador', serif; /* Changed to Mirador font */
+            text-transform: capitalize;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        footer .social-icons {
+            margin: 20px 0;
+        }
+        
+        footer .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        footer .social-icons a:hover {
+            color: #a777e3;
+        }
+        
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            #home .content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
         }
     </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Welcome Folks!</h1>
+            <p>Joanna's personal homepage</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="javascript:void(0);" id="nav-home" onclick="showSection('home')">Home</a></li>
+                <li><a href="javascript:void(0);" id="nav-gallery" onclick="showSection('gallery')">Gallery</a></li>
+                <li><a href="javascript:void(0);" id="nav-blog" onclick="showSection('blog')">Blog</a></li>
+                <li><a href="javascript:void(0);" id="nav-contact" onclick="showSection('contact')">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main class="container">
+        <section id="home" class="section">
+            <h2>Home</h2>
+            <div class="content">
+                <div class="text-content">
+                    <p>Hello everyone! If life had a soundtrack, I'd want mine filled with laughter, kindness, and a little bit of chaos (the fun kind, of course!). This is my little corner of the internet where dreams, ideas, and all magical things come alive.</p>
+                    
+                    <p>So grab a snack, make yourself comfortable, and let's create memories together! 💖</p>
+                </div>
+                <div class="image-content">
+                    <img src="images/profile.jpg" alt="Profile Photo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\' viewBox=\'0 0 400 400\'><rect width=\'400\' height=\'400\' fill=\'%23f0f2f5\'/><path d=\'M200 100 A 75 75 0 1 0 200 250 A 75 75 0 1 0 200 100 Z\' fill=\'%23ddd\'/><path d=\'M100 350 C 100 325 150 300 200 300 C 250 300 300 325 300 350 Z\' fill=\'%23ddd\'/></svg>'">
+                </div>
+            </div>
+        </section>
+        
+        <section id="gallery" class="section">
+            <h2>Gallery</h2>
+            <p>Every image tells a story. Here are some beautiful moments I've captured. Life is a canvas, and these are the brushstrokes of my experiences. 📸</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/sunset.jpg" alt="Photo 1" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'250\' height=\'250\' viewBox=\'0 0 250 250\'><rect width=\'250\' height=\'250\' fill=\'%23f0f2f5\'/><text x=\'125\' y=\'125\' font-family=\'Arial\' font-size=\'14\' text-anchor=\'middle\' fill=\'%23888\'>Sunset Photo</text></svg>'">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/car.jpg" alt="Photo 2" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'250\' height=\'250\' viewBox=\'0 0 250 250\'><rect width=\'250\' height=\'250\' fill=\'%23f0f2f5\'/><text x=\'125\' y=\'125\' font-family=\'Arial\' font-size=\'14\' text-anchor=\'middle\' fill=\'%23888\'>Car Photo</text></svg>'">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/sza.jpeg" alt="Photo 3" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'250\' height=\'250\' viewBox=\'0 0 250 250\'><rect width=\'250\' height=\'250\' fill=\'%23f0f2f5\'/><text x=\'125\' y=\'125\' font-family=\'Arial\' font-size=\'14\' text-anchor=\'middle\' fill=\'%23888\'>SZA Photo</text></svg>'">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/music.jpg" alt="Photo 4" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'250\' height=\'250\' viewBox=\'0 0 250 250\'><rect width=\'250\' height=\'250\' fill=\'%23f0f2f5\'/><text x=\'125\' y=\'125\' font-family=\'Arial\' font-size=\'14\' text-anchor=\'middle\' fill=\'%23888\'>Music Photo</text></svg>'">
+                </div>
+            </div>
+        </section>
+        
+        <section id="blog" class="section">
+            <h2>Blog</h2>
+            
+            <div class="article-card">
+                <div class="article-header">
+                    <h3>R&B Song Recommendations</h3>
+                </div>
+                <div class="article-content">
+                    <p>Music has the power to calm the soul, lift spirits, and take us on emotional journeys. Whether you're unwinding after a long day or setting the mood for a special moment, these R&B songs will feel just right. 🎶</p>
+                    <ul>
+                        <li>🎶 "Blinding Lights" - The Weeknd</li>
+                        <li>🎶 "Adorn" - Miguel</li>
+                        <li>🎶 "Best Part" - Daniel Caesar ft. H.E.R.</li>
+                        <li>🎶 "Location" - Khalid</li>
+                        <li>🎶 "Superstar" - Usher</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="article-card">
+                <div class="article-header">
+                    <h3>Chill R&B Songs</h3>
+                </div>
+                <div class="article-content">
+                    <p>Sometimes, you just need to sit back, relax, and let the smooth and soulful R&B melodies wash over you. 🎵</p>
+                    <ul>
+                        <li>🎵 "Get You" - Daniel Caesar ft. Kali Uchis</li>
+                        <li>🎵 "Thinkin Bout You" - Frank Ocean</li>
+                        <li>🎵 "Come Through and Chill" - Miguel ft. J. Cole</li>
+                        <li>🎵 "Love Galore" - SZA ft. Travis Scott</li>
+                        <li>🎵 "Pretty Little Fears" - 6LACK ft. J. Cole</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="article-card">
+                <div class="article-header">
+                    <h3>GRWM Playlist</h3>
+                </div>
+                <div class="article-content">
+                    <p>Getting ready? Let these SZA songs create the perfect atmosphere! 💄</p>
+                    <ul>
+                        <li>💄 "Good Days" - SZA</li>
+                        <li>💄 "Kill Bill" - SZA</li>
+                        <li>💄 "Snooze" - SZA</li>
+                        <li>💄 "Broken Clocks" - SZA</li>
+                        <li>💄 "Drew Barrymore" - SZA</li>
+                        <li>💄 "The Weekend" - SZA</li>
+                        <li>💄 "Garden (Say It Like Dat)" - SZA</li>
+                        <li>💄 "20 Something" - SZA</li>
+                    </ul>
+                    <p>Put on your makeup, choose your outfit, and let SZA's soulful voice make you feel unmatched! 💃✨</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact" class="section">
+            <h2>Contact</h2>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p>Here's a little about me! Feel free to reach out and connect with me. 💌💬</p>
+                    <p><strong>Name:</strong> Joanna Gratia</p>
+                    <p><strong>Email:</strong> <a href="mailto:joannagratia@gmail.com">joannagratia@gmail.com</a></p>
+                    <p><strong>Location:</strong> Manado, Indonesia</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Joanna Gratia - All Rights Reserved</p>
+        </div>
+    </footer>
+
     <script>
         function showSection(sectionId) {
+            // Hide all sections
             const sections = document.querySelectorAll('.section');
             sections.forEach(section => {
                 section.classList.remove('active');
             });
+            
+            // Show selected section
             document.getElementById(sectionId).classList.add('active');
+            
+            // Save active section in localStorage
+            localStorage.setItem('activeSection', sectionId);
+            
+            // Update active navigation
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            document.getElementById('nav-' + sectionId).classList.add('active');
         }
 
         window.onload = function() {
-            showSection('home'); // Show the home section by default
+            // Check if there's a saved active section
+            const savedSection = localStorage.getItem('activeSection');
+            
+            // Display section from storage or default to 'home'
+            showSection(savedSection || 'home');
+            
+            // Preload images for placeholders
+            const galleryItems = document.querySelectorAll('.gallery-item img');
+            galleryItems.forEach(img => {
+                if (!img.complete) {
+                    img.onerror();
+                }
+            });
         };
     </script>
-</head>
-<body>
-    <h1>Welcome to My Personal Homepage</h1>
-    <nav>
-        <a href="javascript:void(0);" onclick="showSection('home')">Home</a> |
-        <a href="javascript:void(0);" onclick="showSection('gallery')">Gallery</a> |
-        <a href="javascript:void(0);" onclick="showSection('blog')">Blog</a> |
-        <a href="javascript:void(0);" onclick="showSection('contact')">Contact</a>
-    </nav>
-    
-    <section id="home" class="section">
-        <h2>Home</h2>
-        <p>Welcome to my personal space on the web! Here, I share my passion, creativity, and favorite things in life. Feel free to explore and immerse yourself in the vibes of my world!</p>
-        <p>Hi there, folks! If life had a soundtrack, I’d want it to be filled with laughter, kindness, and a little bit of chaos (the fun kind, of course!). This is my little corner of the internet where dreams, ideas, and all things magical come to life. So grab a snack, get comfy, and let’s make some memories together! 💖</p>
-    </section>
-    
-    <section id="gallery" class="section">
-        <h2>Gallery</h2>
-        <p>Every picture tells a story. Here are some snapshots of my journey and the beautiful moments I've captured. Life is a canvas, and these are the strokes of my experiences. 📸</p>
-        <img src="images/sunset.jpg" alt="Photo 1" width="100">
-        <img src="images/car.jpg" alt="Photo 2" width="100">
-        <img src="images/sza.jpeg" alt="Photo 3" width="100">
-    </section>
-    
-    <section id="blog" class="section">
-        <h2>Blog</h2>
-        <article>
-            <h3>Recommended R&B Songs</h3>
-            <p>Music has the power to soothe the soul, lift our spirits, and take us on an emotional journey. Whether you're unwinding after a long day or setting the mood for a special moment, these R&B hits will hit just right. 🎶</p>
-            <ul>
-                <li>🎶 "Blinding Lights" - The Weeknd</li>
-                <li>🎶 "Adorn" - Miguel</li>
-                <li>🎶 "Best Part" - Daniel Caesar ft. H.E.R.</li>
-                <li>🎶 "Location" - Khalid</li>
-                <li>🎶 "Superstar" - Usher</li>
-            </ul>
-        </article>
-        
-        <article>
-            <h3>Chill R&B Songs</h3>
-            <p>Sometimes, you just need to sit back, relax, and let the smooth, soulful vibes of chill R&B wash over you. 🎵</p>
-            <ul>
-                <li>🎵 "Get You" - Daniel Caesar ft. Kali Uchis</li>
-                <li>🎵 "Thinkin Bout You" - Frank Ocean</li>
-                <li>🎵 "Come Through and Chill" - Miguel ft. J. Cole</li>
-                <li>🎵 "Love Galore" - SZA ft. Travis Scott</li>
-                <li>🎵 "Pretty Little Fears" - 6LACK ft. J. Cole</li>
-            </ul>
-        </article>
-        
-        <article>
-            <h3>GRWM Playlist</h3>
-            <p>Getting ready? Let these SZA hits set the perfect vibe! 💄</p>
-            <ul>
-                <li>💄 "Good Days" - SZA</li>
-                <li>💄 "Kill Bill" - SZA</li>
-                <li>💄 "Snooze" - SZA</li>
-                <li>💄 "Broken Clocks" - SZA</li>
-                <li>💄 "Drew Barrymore" - SZA</li>
-                <li>💄 "The Weekend" - SZA</li>
-                <li>💄 "Garden (Say It Like Dat)" - SZA</li>
-                <li>💄 "20 Something" - SZA</li>
-            </ul>
-            <p>Put on your makeup, pick out your outfit, and let SZA’s soulful voice make you feel unstoppable! 💃✨</p>
-        </article>
-    </section>
-    
-    <section id="contact" class="section">
-        <h2>Contact</h2>
-        <p>Here’s a little about me! Feel free to reach out and connect. 💌💬</p>
-        <p><strong>Name:</strong> Joanna Gratia</p>
-        <p><strong>Email:</strong> <a href="mailto:joannagratia@gmail.com">joannagratia@gmail.com</a></p>
-    </section>
 </body>
 </html>
